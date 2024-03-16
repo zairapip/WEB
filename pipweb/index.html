@@ -66,25 +66,25 @@
 									<div class="content">								
 										<h3 align="left">Si eres Sender y estas registrado inicia sesión</h3>
 							<!-- Form -->						
-										<form method="post" action="#">
+										<form method="post" action="login.php">
 											<div class="row gtr-uniform">
 												<div class="col-6 col-12-xsmall">
-													<input type="text" name="demo-name" id="demo-name" value="" placeholder="Usuario" />
+													<input type="text" name="username" id="username" value="" placeholder="Usuario"required />
 												</div>
-												<div class="col-6 col-12-xsmall">
-							<!-- CAMBIAR A CONTRASEÑA CREAR CCS -->						
-													<input type="email" name="demo-email" id="demo-email" value="" placeholder="Contraseña" />
+												<div class="col-6 col-12-xsmall">					
+													<input type="password" name="password" id="password" value="" placeholder="Contraseña" required/>
+													<input type="hidden" name="user_type" value="2">s
 												</div>
+												
+											</div>
+											<div class="col-12">
+													<ul class="actions">
+														<li><input type="submit" value="Inicia Sesion" class="primary" /></li>
+													</ul>
 											</div>										
 										</form>		
 									</div>
 								</div>	
-							<!-- CAMBIAR  CCS  button primary para que el color sea #07923F-->		
-								<footer class="major">
-									<ul class="actions special">
-										<li><a href="senders.html" class="button primary">Inicia Sesion</a></li>
-									</ul>
-								</footer>
 							</section>
 
 						<!-- Riders -->
@@ -97,25 +97,26 @@
 								<div class="content">								
 									<h3 align="left">Si eres Riders y estas registrado inicia sesión</h3>
 						<!-- Form -->						
-									<form method="post" action="#">
+									<form method="post" action="login.php">
 										<div class="row gtr-uniform">
 											<div class="col-6 col-12-xsmall">
-												<input type="text" name="demo-name" id="demo-name" value="" placeholder="Usuario" />
+												<input type="text" name="username" id="username" value="" placeholder="Usuario" required />
 											</div>
 											<div class="col-6 col-12-xsmall">
-						<!-- CAMBIAR A CONTRASEÑA CREAR CCS -->							
-												<input type="email" name="demo-email" id="demo-email" value="" placeholder="Contraseña" />
+			
+												<input type="password" name="password" id="password" value="" placeholder="Contraseña" required/>
+												<input type="hidden" name="user_type" value="1">
+											</div>
+											<div class="col-12">
+													<ul class="actions">
+														<li><input type="submit" value="Inicia Sesion" class="primary" /></li>
+													</ul>
 											</div>
 										</div>										
 									</form>		
 								</div>
 							</div>	
 							
-							<footer class="major">
-								<ul class="actions special">
-									<li><a href="riders.html" class="button primary">Inicia Sesion</a></li>
-								</ul>
-							</footer>
 						</section>
 
 							</section>
