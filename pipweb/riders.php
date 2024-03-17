@@ -20,7 +20,7 @@
 
 		$username = $_SESSION['username'];
 
-		$sql = "SELECT * FROM triders WHERE email ='$username'";
+		$sql = "SELECT * FROM Triders WHERE email ='$username'";
         $result = $conn->query($sql);
 
 		if ($result->num_rows > 0) {
@@ -62,7 +62,7 @@
 														$five_days_ago = date('Y-m-d', strtotime('-15 days'));
 														$rider_code=$row['code_rider'];
 														// Consulta SQL para seleccionar las órdenes
-														$sql = "SELECT * FROM torders WHERE code_rider_id = '$rider_code' AND application BETWEEN '$five_days_ago' AND '$current_date'";
+														$sql = "SELECT * FROM Torders WHERE code_rider_id = '$rider_code' AND application BETWEEN '$five_days_ago' AND '$current_date'";
 
 														$result = $conn->query($sql);
 
