@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verificar el tipo de usuario y redirigir a la página correspondiente
     if ($user_type == 1) {
         // Verificar si el usuario y la contraseña coinciden
-            $sql = "SELECT * FROM triders WHERE email ='$username'";
+            $sql = "SELECT * FROM Triders WHERE email ='$username'";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
     } elseif ($user_type == 2) {
         // Verificar si el usuario y la contraseña coinciden
-        $sql = "SELECT * FROM tsenders WHERE email ='$username'";
+        $sql = "SELECT * FROM Tsenders WHERE email ='$username'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
