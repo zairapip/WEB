@@ -87,7 +87,7 @@
 				<!-- Footer -->
 				<footer id="footer">
 					<section>
-						<h2>PIP Delivery</h2>
+						<h2>PIP Faster</h2>
 						<p>Esta Web fue creada por Zaira Rosales Parra</p>
 						<p>Forma parte de un Proyecto Académico</p>
 						<ul class="actions">
