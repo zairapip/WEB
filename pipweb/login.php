@@ -1,56 +1,39 @@
 <?php
 session_start();
-include 'conexion.php';
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $user_type = $_POST['user_type'];
+   
     $username = $_POST['username'];
     $password = $_POST['password'];
-
-    // Verificar el tipo de usuario y redirigir a la página correspondiente
-    if ($user_type == 1) {
-        // Verificar si el usuario y la contraseña coinciden
-            $sql = "SELECT * FROM Triders WHERE email ='$username'";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                if (password_verify($password, $row['password'])) {
-                    // Inicio de sesión exitoso
-                    $_SESSION['username'] = $username;
-                    echo "Inicio de sesión exitoso. ¡Bienvenido, $username!";
-                    header("Location: riders.php");
-                } else {
-                    echo "Contraseña incorrecta";
-                }
-            } else {
-                echo "Usuario no encontrado";
-            }
-            
-    } elseif ($user_type == 2) {
-        // Verificar si el usuario y la contraseña coinciden
-        $sql = "SELECT * FROM Tsenders WHERE email ='$username'";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            if (password_verify($password, $row['password'])) {
-                // Inicio de sesión exitoso
-                $_SESSION['username'] = $username;
-                echo "Inicio de sesión exitoso. ¡Bienvenido, $username!";
-                header("Location: senders.php");
-            } else {
-                echo "Contraseña incorrecta";
-            }
-        } else {
-            echo "Usuario no encontrado";
-        }
-        
+    $email = $_POST['email'];
+    
+    // URL de la API que deseas consumir
+    $url = "https://pipfaster.com:8443/v1/api/users/gets/";
+    
+    // Usar file_get_contents para obtener el contenido de la URL
+    $response = file_get_contents($url);
+    
+    // Verificar si hubo algún error
+    if ($response === FALSE) {
+        echo "Error al consumir la API";
+        curl_close($ch);
     } else {
-        // Tipo de usuario no válido
-        echo "Tipo de usuario no válido";
+        // Convertir la respuesta JSON a un array asociativo
+        
+       // Convertir la respuesta JSON a un array asociativo
+    $data = json_decode($response, true);
     }
+    foreach ($data as $user) {
+        if ($user['email'] === $email) {
+            $_SESSION['username'] = $username;
+            echo "Inicio de sesión exitoso. ¡Bienvenido, $username!";
+            header("Location: riders.php");
+        }else{
+            header("Location: ErrorInicio.html");
+        }
+
+}
 }
 
-$conn->close();
 ?>

@@ -11,21 +11,27 @@
 	<body class="is-preload">
 		<?php
 		session_start();
-		include 'conexion.php';
 		
 		if (!isset($_SESSION['username'])) {
-			header("Location: login.html");
+			header("Location: index.html");
 			exit();
 		}
 
-		$username = $_SESSION['username'];
-
-		$sql = "SELECT * FROM Triders WHERE email ='$username'";
-        $result = $conn->query($sql);
-
-		if ($result->num_rows > 0) {
-			$row = $result->fetch_assoc();
-		}
+		 // URL de la API que deseas consumir
+		 $url = "https://pipfaster.com:8443/v1/api/users/gets/";
+    
+		 // Usar file_get_contents para obtener el contenido de la URL
+		 $response = file_get_contents($url);
+		 
+		 // Verificar si hubo algún error
+		 if ($response === FALSE) {
+			 echo "Error al consumir la API";
+		 } else {
+			 // Convertir la respuesta JSON a un array asociativo
+			 
+			// Convertir la respuesta JSON a un array asociativo
+		 $data = json_decode($response, true);
+		 }
 		?>
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -33,7 +39,7 @@
 				<!-- Header -->
 					<header id="header">
 						<h1>Hola Rider</h1>
-						<!-- usuario logeado --><p><?php echo $username;?></p>
+						
 					</header>
 
 				<!-- Main -->
@@ -43,51 +49,67 @@
 							<section id="content" class="main">
 								<span class="logo"><img src="images/pip22.gif" alt="logo" /></span>
 								<h2>Consultas</h2>
-								<p>Numero de telefono: <?php echo $row['telephone'];?></p>
-								<p>Codigo de raider:  <?php echo $row['code_rider'];?></p>
+								
 								<div class="table-wrapper">
 											<table>
 												<thead>
 													<tr>
-														<th>Código de orden</th>
-														<th>Pago</th>
-														<th>fecha</th>
+														<th>id</th>
+														<th>nombre</th>
+														<th>apellido</th>
+														<th>username</th>
+														<th>email</th>
+														<th>telefono</th>
 													</tr>
 												</thead>
 												<tbody>
 												<?php
-												// Fecha actual
-														$current_date = date('Y-m-d');
-														// Fecha hace 5 días
-														$five_days_ago = date('Y-m-d', strtotime('-15 days'));
-														$rider_code=$row['code_rider'];
-														// Consulta SQL para seleccionar las órdenes
-														$sql = "SELECT * FROM Torders WHERE code_rider_id = '$rider_code' AND application BETWEEN '$five_days_ago' AND '$current_date'";
-
-														$result = $conn->query($sql);
-
-														while($row = $result->fetch_assoc()) {
+														foreach ($data as $user)  {
 															echo "<tr>";
-															echo "<td>" . $row["code_order"] . "</td>";
-															echo "<td>" . $row["pay"] . "</td>";
-															echo "<td>" . $row["application"] . "</td>";
+															echo "<td>" . $user['id'] . "</td>";
+															echo "<td>" . $user['name'] . "</td>";
+															echo "<td>" . $user["surname"] . "</td>";
+															echo "<td>" . $user["username"] . "</td>";
+															echo "<td>" . $user["email"] . "</td>";
+															echo "<td>" . $user["telephone"] . "</td>";
 															echo "</tr>";
 														}
-    
 												?>
 												</tbody>
 											</table>
 										</div>
 								
-								
-							</section>
+							<section id="first" class="main special">						
+								<header class="major">
+									<h2>Borrar Usuario</h2>
+								</header>
+								<div class="spotlight">
+									<div class="content">								
+										<h3 align="left">Borrar Usuario</h3>
+							<!-- Form -->						
+										<form method="post" action="Delete.php">
+											<div class="row gtr-uniform">
+												<div class="col-6 col-12-xsmall">
+													<input type="text" name="id" id="id" value="" placeholder="id Usuario"required />
+												</div>
+												</div>
+											<br>
+											<div class="col-12">
+													<ul class="actions">
+														<li><input type="submit" value="Borrar" class="primary" /></li>
+													</ul>
+											</div>
+										</form>					
 
+							</section>
+														<!-- Senders -->
+							
 					</div>
 
 				<!-- Footer -->
 				<footer id="footer">
 					<section>
-						<h2>PIP Faster</h2>
+						<h2>PIP Delivery</h2>
 						<p>Esta Web fue creada por Zaira Rosales Parra</p>
 						<p>Forma parte de un Proyecto Académico</p>
 						<ul class="actions">

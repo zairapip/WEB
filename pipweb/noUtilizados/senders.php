@@ -20,7 +20,7 @@
 
 		$username = $_SESSION['username'];
 
-		$sql = "SELECT * FROM Tsenders WHERE email ='$username'";
+		$sql = "SELECT * FROM tsenders WHERE email ='$username'";
         $result = $conn->query($sql);
 
 		if ($result->num_rows > 0) {
@@ -62,7 +62,7 @@
 														$five_days_ago = date('Y-m-d', strtotime('-15 days'));
 														$rider_code=$row['code_sender'];
 														// Consulta SQL para seleccionar las órdenes
-														$sql = "SELECT * FROM Torders WHERE code_sender_id = '$rider_code' AND application BETWEEN '$five_days_ago' AND '$current_date'";
+														$sql = "SELECT * FROM torders WHERE code_sender_id = '$rider_code' AND application BETWEEN '$five_days_ago' AND '$current_date'";
 
 														$result = $conn->query($sql);
 
@@ -87,7 +87,7 @@
 				<!-- Footer -->
 				<footer id="footer">
 					<section>
-						<h2>PIP Faster</h2>
+						<h2>PIP Delivery</h2>
 						<p>Esta Web fue creada por Zaira Rosales Parra</p>
 						<p>Forma parte de un Proyecto Académico</p>
 						<ul class="actions">
